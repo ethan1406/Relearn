@@ -1,0 +1,79 @@
+:root {
+  --main-color: #FF35BD;
+  --text-color: #ffffff;
+  --hyperlink-color: #1fa86e;
+  --unclickable-color: #bbbbbb;
+  --header-bar-color: #1fa86e;
+  --button-color: #444444;
+  --button-hover-color: #333333;
+  --button-divider-color: #555555;
+  --widget-background-color: #444444; }
+
+body {
+  font-family: "Arial", Arial, sans-serif;
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+.navbar-default {
+  background-color: var(--main-color); }
+  .navbar-default .navbar-brand {
+    color: white; }
+  .navbar-default .navbar-nav > li > a {
+    color: white; }
+
+.absoluteWrapper {
+  position: fixed;
+  text-align: center;
+  vertical-align: middle;
+  top: 50%;
+  left: 50%;
+  display: block;
+  height: 50%;
+  width: 350px;
+  background-color: #efefef;
+  border-radius: 25px;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ccc; }
+  .absoluteWrapper button {
+    overflow-x: hidden;
+    font-family: Arial;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: var(--main-color);
+    color: white; }
+
+.loginForm {
+  border-radius: 2px;
+  text-align: center;
+  table-layout: fixed;
+  width: 100%;
+  height: 80%;
+  margin-top: 10%;
+  line-spacing: 1; }
+  .loginForm th {
+    text-align: center; }
+  .loginForm td {
+    padding: 5px; }
+
+.textField:focus {
+  outline: none; }
+
+.textField {
+  width: 80%;
+  height: 50%;
+  padding: 1em 2em;
+  font-size: 17px;
+  line-height: 1.43;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 2px solid #d3d3d3;
+  border-radius: 4px; }
+
+#fbButton {
+  background-color: var(--main-color);
+  color: white; }
