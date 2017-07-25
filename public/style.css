@@ -74,6 +74,12 @@ body {
   border: 2px solid #d3d3d3;
   border-radius: 4px; }
 
+.link {
+  cursor: pointer; }
+
+.table-responsive {
+  overflow: visible; }
+
 #fbButton {
   background-color: var(--main-color);
   color: white; }

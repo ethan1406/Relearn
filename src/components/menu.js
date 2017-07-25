@@ -8,7 +8,7 @@ class Menu extends Component {
 	<Navbar fixedTop >
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Home</a>
+            <a href="/">ReFriend</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>

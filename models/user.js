@@ -8,8 +8,10 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String,
-        friends      : Array,
+        dpUrl        : String,
+        
     },
+    friends          : Array,
 });
 
 // create the model for users and expose it to our app

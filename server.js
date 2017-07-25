@@ -6,6 +6,8 @@ import express from 'express';
 import flash from 'connect-flash';
 import session from 'express-session';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+
 
 import apiRouter from './api';
 
@@ -17,7 +19,11 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, '# MongoDB - connection error: '));
 
 
-export default db;
+//export default db;
+
+
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
 
 
 require('./config/passport')(passport);
@@ -49,7 +55,7 @@ server.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email
     // handle the callback after facebook has authenticated the user
 server.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/',
+            successRedirect : '/friendList',
             failureRedirect : '/login',
 
 
