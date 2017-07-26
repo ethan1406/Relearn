@@ -101,7 +101,12 @@ module.exports = function(passport) {
                                         friendObject['currentFriendship'] = 'default';
                                         friendObject['updateFriendship'] = 'default';
                                         existedUser.friends.push(friendObject);
-
+                                        
+                                        User.save((err, updatedExistedUser) => {
+                                            if(err){
+                                                console.err(err);
+                                            }
+                                        });
 
                                         //assigning dpUrl to the user
                                         friendWithRelations.dpUrl = existedUser.facebook.dpUrl;
