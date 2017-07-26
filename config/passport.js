@@ -102,7 +102,7 @@ module.exports = function(passport) {
                                         friendObject['updateFriendship'] = 'default';
                                         existedUser.friends.push(friendObject);
                                         
-                                        User.save((err, updatedExistedUser) => {
+                                        existedUser.save((err, updatedExistedUser) => {
                                             if(err){
                                                 console.err(err);
                                             }
