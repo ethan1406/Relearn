@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {updateFriendship} from '../actions/userActions';
-import {Table, Image, SplitButton, MenuItem} from 'react-bootstrap';
+import {Table, Image, DropdownButton, MenuItem} from 'react-bootstrap';
 
 
 //import axios from 'axios';
@@ -23,9 +23,39 @@ class FriendList extends Component {
 	// 		}	
 	// 	);
 	// }
+	
 
 
 	render() {
+		const friendsToDisplay = this.props.friends.sort((a,b) => {
+			return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+
+		});
+		const friendDisplay =  friendsToDisplay.map(friend => 
+					<tr key={friend.id} className = "link">
+						<td>
+							<Image src = {friend.dpUrl} rounded responsive/>
+						</td>
+						<td>
+							{friend.name}
+						</td>
+						<td>
+							{friend.currentFriendship}
+						</td>
+						<td>
+							{friend.updateFriendship}
+						</td>
+						<td>
+							<DropdownButton className="friendshipBtn" bsStyle = "primary" ref = "friendshipBtn" title = "Just Friends?" id={`dropdown-basic-${friend.id}`}>
+								<MenuItem eventKey="1" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'hookup')}>hookup</MenuItem>
+								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'date')}>date</MenuItem>
+								<MenuItem eventKey="3" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'interested')}>interested</MenuItem>
+								<MenuItem eventKey="4" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'default')}>default</MenuItem>
+							</DropdownButton>
+						</td>
+					</tr>);
+
+
 		return (
 			<Table responsive className= "table-striped">
 				<thead>
@@ -46,29 +76,7 @@ class FriendList extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.props.friends.map(friend => 
-					<tr key={friend.id} className = "link">
-						<td>
-							<Image src = {friend.dpUrl} rounded responsive/>
-						</td>
-						<td>
-							{friend.name}
-						</td>
-						<td>
-							{friend.currentFriendship}
-						</td>
-						<td>
-							{friend.updateFriendship}
-						</td>
-						<td>
-							<SplitButton className="friendshipBtn" bsStyle = "primary" ref = "friendshipBtn" title = "Button" id={`split-button-basic-${friend.id}`}>
-								<MenuItem eventKey="1" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'hookup')}>hookup</MenuItem>
-								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'date')}>date</MenuItem>
-								<MenuItem eventKey="3" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'interested')}>interested</MenuItem>
-								<MenuItem eventKey="4" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'default')}>default</MenuItem>
-							</SplitButton>
-						</td>
-					</tr>)}
+					{friendDisplay}
 				</tbody>
 
 			</Table>
