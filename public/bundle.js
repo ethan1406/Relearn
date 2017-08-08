@@ -90,6 +90,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_axios2.default.get('/api/userData').then(function (resp) {
+	
 		console.log(resp.data);
 	
 		var store = (0, _redux.createStore)(_userReducer2.default, resp.data, (0, _redux.applyMiddleware)(_reduxThunk2.default));
@@ -22821,7 +22822,7 @@
 										null,
 										_react2.default.createElement(
 											"a",
-											{ id: "fbButton", href: "/auth/facebook", className: "btn" },
+											{ id: "fbButton", href: "/auth/facebook" },
 											_react2.default.createElement("span", { className: "fa fa-facebook" }),
 											" Facebook"
 										)
@@ -22856,9 +22857,15 @@
 	
 	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 186);
 	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 444);
+	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 275);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22893,7 +22900,7 @@
 	            null,
 	            _react2.default.createElement(
 	              'a',
-	              { href: '/' },
+	              { href: '/friendList' },
 	              'ReFriend'
 	            )
 	          ),
@@ -22922,7 +22929,17 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
 	              { eventKey: 1, href: '/admin' },
-	              'Admin'
+	              'Settings'
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              { eventKey: 2, href: '/cart' },
+	              'Match Queue',
+	              _react2.default.createElement(
+	                _reactBootstrap.Badge,
+	                { className: 'badge' },
+	                this.props.pendingNotifications.length
+	              )
 	            )
 	          )
 	        )
@@ -22934,7 +22951,17 @@
 	}(_react.Component);
 	// <Link to="/about">About</Link> 
 	
-	exports.default = Menu;
+	Menu.propTypes = {
+	  pendingNotifications: _propTypes2.default.array
+	};
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    pendingNotifications: state.pendingNotifications
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Menu);
 
 /***/ }),
 /* 186 */
@@ -43728,23 +43755,6 @@
 	
 		_createClass(FriendList, [{
 			key: 'render',
-	
-	
-			// static propTypes = {
-			// 	initialData: PropTypes.object.isRequired
-			// };
-			// state = this.props.initialData; 
-			// state = {friends: []};
-	
-			// componentDidMount() {
-			// 	axios.get('/api/userData').then(resp =>{
-			// 		const friends = resp.data.friends;
-			// 		this.setState({friends});
-			// 		}	
-			// 	);
-			// }
-	
-	
 			value: function render() {
 				var _this2 = this;
 	
@@ -43780,7 +43790,7 @@
 							null,
 							_react2.default.createElement(
 								_reactBootstrap.DropdownButton,
-								{ className: 'friendshipBtn', bsStyle: 'primary', ref: 'friendshipBtn', title: 'Just Friends?', id: 'dropdown-basic-' + friend.id },
+								{ className: 'friendshipBtn', ref: 'friendshipBtn', title: 'Just Friends?', id: 'dropdown-basic-' + friend.id },
 								_react2.default.createElement(
 									_reactBootstrap.MenuItem,
 									{ eventKey: '1', onClick: function onClick() {
@@ -43877,6 +43887,20 @@
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
+	
+	// static propTypes = {
+	// 	initialData: PropTypes.object.isRequired
+	// };
+	// state = this.props.initialData; 
+	// state = {friends: []};
+	
+	// componentDidMount() {
+	// 	axios.get('/api/userData').then(resp =>{
+	// 		const friends = resp.data.friends;
+	// 		this.setState({friends});
+	// 		}	
+	// 	);
+	// }
 
 /***/ }),
 /* 444 */
@@ -47914,7 +47938,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.friends = exports.__v = exports._id = exports.facebook = undefined;
+	exports.friends = exports.__v = exports._id = exports.matchNotifications = exports.pendingNotifications = exports.facebook = undefined;
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
@@ -47924,6 +47948,20 @@
 	
 	var facebook = exports.facebook = function facebook() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	
+		return state;
+	};
+	
+	var pendingNotifications = exports.pendingNotifications = function pendingNotifications() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	
+	
+		return state;
+	};
+	
+	var matchNotifications = exports.matchNotifications = function matchNotifications() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	
 	
 		return state;
@@ -47997,6 +48035,8 @@
 	};
 	
 	exports.default = (0, _redux.combineReducers)({
+		pendingNotifications: pendingNotifications,
+		matchNotifications: matchNotifications,
 		_id: _id,
 		__v: __v,
 		facebook: facebook,

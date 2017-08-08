@@ -8,23 +8,6 @@ import {Table, Image, DropdownButton, MenuItem} from 'react-bootstrap';
 //import axios from 'axios';
 
 class FriendList extends Component {
-	
-
-	// static propTypes = {
-	// 	initialData: PropTypes.object.isRequired
-	// };
-	// state = this.props.initialData; 
-	// state = {friends: []};
-
-	// componentDidMount() {
-	// 	axios.get('/api/userData').then(resp =>{
-	// 		const friends = resp.data.friends;
-	// 		this.setState({friends});
-	// 		}	
-	// 	);
-	// }
-	
-
 
 	render() {
 		const friendsToDisplay = this.props.friends.sort((a,b) => {
@@ -46,7 +29,7 @@ class FriendList extends Component {
 							{friend.updateFriendship}
 						</td>
 						<td>
-							<DropdownButton className="friendshipBtn" bsStyle = "primary" ref = "friendshipBtn" title = "Just Friends?" id={`dropdown-basic-${friend.id}`}>
+							<DropdownButton className="friendshipBtn"  ref = "friendshipBtn" title = "Just Friends?" id={`dropdown-basic-${friend.id}`}>
 								<MenuItem eventKey="1" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'hookup')}>hookup</MenuItem>
 								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'date')}>date</MenuItem>
 								<MenuItem eventKey="3" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'interested')}>interested</MenuItem>
@@ -114,3 +97,20 @@ const mapDispatchToProps = (dispatch) => (
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendList);
+
+
+
+
+	// static propTypes = {
+	// 	initialData: PropTypes.object.isRequired
+	// };
+	// state = this.props.initialData; 
+	// state = {friends: []};
+
+	// componentDidMount() {
+	// 	axios.get('/api/userData').then(resp =>{
+	// 		const friends = resp.data.friends;
+	// 		this.setState({friends});
+	// 		}	
+	// 	);
+	// }

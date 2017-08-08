@@ -16,6 +16,8 @@ import thunk from 'redux-thunk';
 
 
 axios.get('/api/userData').then(resp => {
+
+
 	console.log(resp.data);
 
 	const store = createStore(reducers, resp.data, applyMiddleware(thunk));
@@ -26,7 +28,7 @@ axios.get('/api/userData').then(resp => {
 				<div>
 					<Menu />
 					<Switch>
-						<Route exact path="/" component={FriendList}/>
+						<Route exact={true} path="/" component={FriendList}/>
 						<Route path="/login" component={Login}/>
 						<Route path="/friendList" component={FriendList}/>
 					</Switch>

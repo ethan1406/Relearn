@@ -12,6 +12,8 @@ var userSchema = mongoose.Schema({
         
     },
     friends          : Array,
+    matchNotifications: Array,
+    pendingNotifications: Array,
 });
 
 // create the model for users and expose it to our app

@@ -7,6 +7,18 @@ export const facebook = (state = {}) => {
 	return state;
 };
 
+
+export const pendingNotifications = (state = []) => {
+
+	return state;
+};
+
+
+export const matchNotifications = (state = []) => {
+
+	return state;
+};
+
 export const _id = (state = '') => {
 
 	return state;
@@ -74,6 +86,8 @@ export const friends = (state = [], action) => {
 
 
 export default combineReducers({
+	pendingNotifications,
+	matchNotifications,
 	_id,
 	__v,
 	facebook,

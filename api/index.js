@@ -25,6 +25,9 @@ router.get('/userData', (req, res) =>{
 
 
 router.put('/updateFriendship', (req, res) =>{
+
+	console.log(req.user._id);
+
 	const facebookId = req.body.friendId;
 
 	var query = {_id : req.user._id,
@@ -36,7 +39,7 @@ router.put('/updateFriendship', (req, res) =>{
 					friends: {$elemMatch: {id: req.user.facebook.id}}};
 
 
-	User.findOne(query2, 'friends.$', (err, person) => {
+	User.findOne(query2, 'friends.$ pendingNotifications', (err, person) => {
 		if(err){
 			console.err(err);
 		}
@@ -62,6 +65,7 @@ router.put('/updateFriendship', (req, res) =>{
 				}
 			};
 
+
 			User.update(query2, update2, err => {
 				if(err){
 					console.err(err);
@@ -83,9 +87,18 @@ router.put('/updateFriendship', (req, res) =>{
 				'friends.$.updateFriendship': req.body.status
 				}
 			};
+			
+
+			if(person.pendingNotifications.indexOf(req.user.facebook.id) === -1){
+				person.pendingNotifications.push(req.user.facebook.id);
+				person.save();
+			}
+
+
 
 			success = false;
 		}
+
 
 		User.findOneAndUpdate(query, update, options, (err, user) => {
 
