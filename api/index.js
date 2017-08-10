@@ -26,7 +26,6 @@ router.get('/userData', (req, res) =>{
 
 router.put('/updateFriendship', (req, res) =>{
 
-	console.log(req.user._id);
 
 	const facebookId = req.body.friendId;
 
@@ -37,34 +36,75 @@ router.put('/updateFriendship', (req, res) =>{
 
 	var query2 = {'facebook.id' : facebookId,
 					friends: {$elemMatch: {id: req.user.facebook.id}}};
+	
 
-
-	User.findOne(query2, 'friends.$ pendingNotifications', (err, person) => {
+	User.findOne(query2, 'friends.$ pendingNotifications matchNotifications', (err, person) => {
 		if(err){
 			console.err(err);
 		}
 
 		var update = {};
 		var success = false;
+	
 
 		if(person.friends[0].updateFriendship === req.body.status){
 
-			update = {
-				'$set': {
-				'friends.$.updateFriendship': req.body.status,
-				'friends.$.currentFriendship': req.body.status
 
-				}
-			};
 			person.friends[0].currentFriendship = req.body.status;
 			success = true;
+
+
+			//pending notificaitons
+			var found1 = 0;
+			const pos1 = person.pendingNotifications.indexOf(req.user.facebook.id);
+			if(pos1 > -1){
+				found1 = 1;
+				person.pendingNotifications.splice(pos1, 1);
+			}
+
+			const pos2 = req.user.pendingNotifications.indexOf(req.body.friendId);
+			if(pos2 > -1){
+				req.user.pendingNotifications.splice(pos2, 1);
+			}
 			
-			var update2 = {
-				'$set' : {
-					'friends.$.currentFriendship' : req.body.status
+
+			//match notifications
+			if(person.matchNotifications.indexOf(req.user.facebook.id) === -1){
+				person.matchNotifications.push(req.user.facebook.id);
+			}
+			
+			if(req.user.matchNotifications.indexOf(req.body.friendId) === -1){
+				req.user.matchNotifications.push(req.body.friendId);
+			}
+
+
+			var update2;
+
+
+			if(found1){
+				update2 = {
+					'$set' : {
+						'friends.$.currentFriendship' : req.body.status,
+						'pendingNotifications' : person.pendingNotifications,
+						'matchNotifications': person.matchNotifications
+					}
+				};
+			}else{
+				update2 = {
+					'$set' : {
+						'friends.$.currentFriendship' : req.body.status,
+						'matchNotifications': person.matchNotifications
+					}
+				};
+			}
+			update = {
+				'$set': {
+					'friends.$.updateFriendship': req.body.status,
+					'friends.$.currentFriendship': req.body.status,
+					'pendingNotifications': req.user.pendingNotifications,
+					'matchNotifications' : req.user.matchNotifications
 				}
 			};
-
 
 			User.update(query2, update2, err => {
 				if(err){
@@ -106,7 +146,7 @@ router.put('/updateFriendship', (req, res) =>{
 				console.log('# API UPDATE friendship: ', err);
 			}
 			if(success){
-				res.json({success:'true'});
+				res.json({success:'true', updatedPNotifications: req.user.pendingNotifications});
 			}else{
 				res.json({success:'false'});
 			}

@@ -94,19 +94,26 @@ module.exports = function(passport) {
                                         
                                     }
                                     if(existedUser){
-                                        var friendObject = {};
-                                        friendObject['name'] = newUser.facebook.name;
-                                        friendObject['id'] = newUser.facebook.id;
-                                        friendObject['dpUrl'] = newUser.facebook.dpUrl;
-                                        friendObject['currentFriendship'] = 'default';
-                                        friendObject['updateFriendship'] = 'default';
-                                        existedUser.friends.push(friendObject);
-                                        
-                                        existedUser.save((err, updatedExistedUser) => {
-                                            if(err){
-                                                console.err(err);
-                                            }
+                                      
+                                        var alreadyExisted = existedUser.friends.filter(friend => {
+                                            return friend.id === profile.id;
                                         });
+                                        if( alreadyExisted.length === 0){
+                                            var friendObject = {};
+                                            friendObject['name'] = newUser.facebook.name;
+                                            friendObject['id'] = newUser.facebook.id;
+                                            friendObject['dpUrl'] = newUser.facebook.dpUrl;
+                                            friendObject['currentFriendship'] = 'default';
+                                            friendObject['updateFriendship'] = 'default';
+                                            existedUser.friends.push(friendObject);
+                                            
+                                            existedUser.save((err, updatedExistedUser) => {
+                                                if(err){
+                                                    console.err(err);
+                                                }
+                                            });
+                                        }
+                                       
 
                                         //assigning dpUrl to the user
                                         friendWithRelations.dpUrl = existedUser.facebook.dpUrl;

@@ -92,6 +92,11 @@ body{
 	}
  }
 
+
+.borderless td, .borderless th {
+	border: none !important;
+}
+
 .absoluteWrapper{
 	position:fixed;
 	text-align: center;

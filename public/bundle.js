@@ -65,7 +65,7 @@
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _FriendList = __webpack_require__(/*! ./components/FriendList */ 443);
+	var _FriendList = __webpack_require__(/*! ./components/FriendList */ 480);
 	
 	var _FriendList2 = _interopRequireDefault(_FriendList);
 	
@@ -73,9 +73,9 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 444);
+	var _reactRedux = __webpack_require__(/*! react-redux */ 443);
 	
-	var _redux = __webpack_require__(/*! redux */ 454);
+	var _redux = __webpack_require__(/*! redux */ 453);
 	
 	var _userReducer = __webpack_require__(/*! ./reducers/userReducer */ 508);
 	
@@ -22857,7 +22857,7 @@
 	
 	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 186);
 	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 444);
+	var _reactRedux = __webpack_require__(/*! react-redux */ 443);
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
@@ -43707,203 +43707,6 @@
 
 /***/ }),
 /* 443 */
-/*!**************************************!*\
-  !*** ./src/components/FriendList.js ***!
-  \**************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRedux = __webpack_require__(/*! react-redux */ 444);
-	
-	var _propTypes = __webpack_require__(/*! prop-types */ 275);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _userActions = __webpack_require__(/*! ../actions/userActions */ 481);
-	
-	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 186);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	//import axios from 'axios';
-	
-	var FriendList = function (_Component) {
-		_inherits(FriendList, _Component);
-	
-		function FriendList() {
-			_classCallCheck(this, FriendList);
-	
-			return _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).apply(this, arguments));
-		}
-	
-		_createClass(FriendList, [{
-			key: 'render',
-			value: function render() {
-				var _this2 = this;
-	
-				var friendsToDisplay = this.props.friends.sort(function (a, b) {
-					return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
-				});
-				var friendDisplay = friendsToDisplay.map(function (friend) {
-					return _react2.default.createElement(
-						'tr',
-						{ key: friend.id, className: 'link' },
-						_react2.default.createElement(
-							'td',
-							null,
-							_react2.default.createElement(_reactBootstrap.Image, { src: friend.dpUrl, rounded: true, responsive: true })
-						),
-						_react2.default.createElement(
-							'td',
-							null,
-							friend.name
-						),
-						_react2.default.createElement(
-							'td',
-							null,
-							friend.currentFriendship
-						),
-						_react2.default.createElement(
-							'td',
-							null,
-							friend.updateFriendship
-						),
-						_react2.default.createElement(
-							'td',
-							null,
-							_react2.default.createElement(
-								_reactBootstrap.DropdownButton,
-								{ className: 'friendshipBtn', ref: 'friendshipBtn', title: 'Just Friends?', id: 'dropdown-basic-' + friend.id },
-								_react2.default.createElement(
-									_reactBootstrap.MenuItem,
-									{ eventKey: '1', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'hookup');
-										} },
-									'hookup'
-								),
-								_react2.default.createElement(
-									_reactBootstrap.MenuItem,
-									{ eventKey: '2', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'date');
-										} },
-									'date'
-								),
-								_react2.default.createElement(
-									_reactBootstrap.MenuItem,
-									{ eventKey: '3', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'interested');
-										} },
-									'interested'
-								),
-								_react2.default.createElement(
-									_reactBootstrap.MenuItem,
-									{ eventKey: '4', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'default');
-										} },
-									'default'
-								)
-							)
-						)
-					);
-				});
-	
-				return _react2.default.createElement(
-					_reactBootstrap.Table,
-					{ responsive: true, className: 'table-striped' },
-					_react2.default.createElement(
-						'thead',
-						null,
-						_react2.default.createElement(
-							'tr',
-							null,
-							_react2.default.createElement(
-								'th',
-								null,
-								'Profile Pic'
-							),
-							_react2.default.createElement(
-								'th',
-								null,
-								'Name'
-							),
-							_react2.default.createElement(
-								'th',
-								null,
-								'currentFriendship'
-							),
-							_react2.default.createElement(
-								'th',
-								null,
-								'updateFriendship'
-							)
-						)
-					),
-					_react2.default.createElement(
-						'tbody',
-						null,
-						friendDisplay
-					)
-				);
-			}
-		}]);
-	
-		return FriendList;
-	}(_react.Component);
-	
-	FriendList.propTypes = {
-		friends: _propTypes2.default.array,
-		updateCurrentFriendship: _propTypes2.default.func
-	};
-	
-	var mapStateToProps = function mapStateToProps(state) {
-		return {
-			friends: state.friends
-		};
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			updateCurrentFriendship: function updateCurrentFriendship(facebookId, status) {
-				dispatch((0, _userActions.updateFriendship)(facebookId, status));
-			}
-		};
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
-	
-	// static propTypes = {
-	// 	initialData: PropTypes.object.isRequired
-	// };
-	// state = this.props.initialData; 
-	// state = {friends: []};
-	
-	// componentDidMount() {
-	// 	axios.get('/api/userData').then(resp =>{
-	// 		const friends = resp.data.friends;
-	// 		this.setState({friends});
-	// 		}	
-	// 	);
-	// }
-
-/***/ }),
-/* 444 */
 /*!************************************!*\
   !*** ./~/react-redux/lib/index.js ***!
   \************************************/
@@ -43914,15 +43717,15 @@
 	exports.__esModule = true;
 	exports.connect = exports.connectAdvanced = exports.createProvider = exports.Provider = undefined;
 	
-	var _Provider = __webpack_require__(/*! ./components/Provider */ 445);
+	var _Provider = __webpack_require__(/*! ./components/Provider */ 444);
 	
 	var _Provider2 = _interopRequireDefault(_Provider);
 	
-	var _connectAdvanced = __webpack_require__(/*! ./components/connectAdvanced */ 448);
+	var _connectAdvanced = __webpack_require__(/*! ./components/connectAdvanced */ 447);
 	
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 	
-	var _connect = __webpack_require__(/*! ./connect/connect */ 451);
+	var _connect = __webpack_require__(/*! ./connect/connect */ 450);
 	
 	var _connect2 = _interopRequireDefault(_connect);
 	
@@ -43936,7 +43739,7 @@
 	exports.connect = _connect2.default;
 
 /***/ }),
-/* 445 */
+/* 444 */
 /*!**************************************************!*\
   !*** ./~/react-redux/lib/components/Provider.js ***!
   \**************************************************/
@@ -43955,9 +43758,9 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _PropTypes = __webpack_require__(/*! ../utils/PropTypes */ 446);
+	var _PropTypes = __webpack_require__(/*! ../utils/PropTypes */ 445);
 	
-	var _warning = __webpack_require__(/*! ../utils/warning */ 447);
+	var _warning = __webpack_require__(/*! ../utils/warning */ 446);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -44048,7 +43851,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 446 */
+/* 445 */
 /*!**********************************************!*\
   !*** ./~/react-redux/lib/utils/PropTypes.js ***!
   \**********************************************/
@@ -44081,7 +43884,7 @@
 	});
 
 /***/ }),
-/* 447 */
+/* 446 */
 /*!********************************************!*\
   !*** ./~/react-redux/lib/utils/warning.js ***!
   \********************************************/
@@ -44114,7 +43917,7 @@
 	}
 
 /***/ }),
-/* 448 */
+/* 447 */
 /*!*********************************************************!*\
   !*** ./~/react-redux/lib/components/connectAdvanced.js ***!
   \*********************************************************/
@@ -44138,7 +43941,7 @@
 	
 	exports.default = connectAdvanced;
 	
-	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 449);
+	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 448);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
@@ -44148,11 +43951,11 @@
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
-	var _Subscription = __webpack_require__(/*! ../utils/Subscription */ 450);
+	var _Subscription = __webpack_require__(/*! ../utils/Subscription */ 449);
 	
 	var _Subscription2 = _interopRequireDefault(_Subscription);
 	
-	var _PropTypes = __webpack_require__(/*! ../utils/PropTypes */ 446);
+	var _PropTypes = __webpack_require__(/*! ../utils/PropTypes */ 445);
 	
 	function _interopRequireDefault(obj) {
 	  return obj && obj.__esModule ? obj : { default: obj };
@@ -44440,7 +44243,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 449 */
+/* 448 */
 /*!********************************************!*\
   !*** ./~/hoist-non-react-statics/index.js ***!
   \********************************************/
@@ -44497,7 +44300,7 @@
 	};
 
 /***/ }),
-/* 450 */
+/* 449 */
 /*!*************************************************!*\
   !*** ./~/react-redux/lib/utils/Subscription.js ***!
   \*************************************************/
@@ -44602,7 +44405,7 @@
 	exports.default = Subscription;
 
 /***/ }),
-/* 451 */
+/* 450 */
 /*!**********************************************!*\
   !*** ./~/react-redux/lib/connect/connect.js ***!
   \**********************************************/
@@ -44626,27 +44429,27 @@
 	
 	exports.createConnect = createConnect;
 	
-	var _connectAdvanced = __webpack_require__(/*! ../components/connectAdvanced */ 448);
+	var _connectAdvanced = __webpack_require__(/*! ../components/connectAdvanced */ 447);
 	
 	var _connectAdvanced2 = _interopRequireDefault(_connectAdvanced);
 	
-	var _shallowEqual = __webpack_require__(/*! ../utils/shallowEqual */ 452);
+	var _shallowEqual = __webpack_require__(/*! ../utils/shallowEqual */ 451);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
-	var _mapDispatchToProps = __webpack_require__(/*! ./mapDispatchToProps */ 453);
+	var _mapDispatchToProps = __webpack_require__(/*! ./mapDispatchToProps */ 452);
 	
 	var _mapDispatchToProps2 = _interopRequireDefault(_mapDispatchToProps);
 	
-	var _mapStateToProps = __webpack_require__(/*! ./mapStateToProps */ 477);
+	var _mapStateToProps = __webpack_require__(/*! ./mapStateToProps */ 476);
 	
 	var _mapStateToProps2 = _interopRequireDefault(_mapStateToProps);
 	
-	var _mergeProps = __webpack_require__(/*! ./mergeProps */ 478);
+	var _mergeProps = __webpack_require__(/*! ./mergeProps */ 477);
 	
 	var _mergeProps2 = _interopRequireDefault(_mergeProps);
 	
-	var _selectorFactory = __webpack_require__(/*! ./selectorFactory */ 479);
+	var _selectorFactory = __webpack_require__(/*! ./selectorFactory */ 478);
 	
 	var _selectorFactory2 = _interopRequireDefault(_selectorFactory);
 	
@@ -44754,7 +44557,7 @@
 	exports.default = createConnect();
 
 /***/ }),
-/* 452 */
+/* 451 */
 /*!*************************************************!*\
   !*** ./~/react-redux/lib/utils/shallowEqual.js ***!
   \*************************************************/
@@ -44798,7 +44601,7 @@
 	}
 
 /***/ }),
-/* 453 */
+/* 452 */
 /*!*********************************************************!*\
   !*** ./~/react-redux/lib/connect/mapDispatchToProps.js ***!
   \*********************************************************/
@@ -44813,9 +44616,9 @@
 	exports.whenMapDispatchToPropsIsMissing = whenMapDispatchToPropsIsMissing;
 	exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
 	
-	var _redux = __webpack_require__(/*! redux */ 454);
+	var _redux = __webpack_require__(/*! redux */ 453);
 	
-	var _wrapMapToProps = __webpack_require__(/*! ./wrapMapToProps */ 475);
+	var _wrapMapToProps = __webpack_require__(/*! ./wrapMapToProps */ 474);
 	
 	function whenMapDispatchToPropsIsFunction(mapDispatchToProps) {
 	  return typeof mapDispatchToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapDispatchToProps, 'mapDispatchToProps') : undefined;
@@ -44836,7 +44639,7 @@
 	exports.default = [whenMapDispatchToPropsIsFunction, whenMapDispatchToPropsIsMissing, whenMapDispatchToPropsIsObject];
 
 /***/ }),
-/* 454 */
+/* 453 */
 /*!******************************!*\
   !*** ./~/redux/lib/index.js ***!
   \******************************/
@@ -44847,27 +44650,27 @@
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 	
-	var _createStore = __webpack_require__(/*! ./createStore */ 455);
+	var _createStore = __webpack_require__(/*! ./createStore */ 454);
 	
 	var _createStore2 = _interopRequireDefault(_createStore);
 	
-	var _combineReducers = __webpack_require__(/*! ./combineReducers */ 470);
+	var _combineReducers = __webpack_require__(/*! ./combineReducers */ 469);
 	
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 	
-	var _bindActionCreators = __webpack_require__(/*! ./bindActionCreators */ 472);
+	var _bindActionCreators = __webpack_require__(/*! ./bindActionCreators */ 471);
 	
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 	
-	var _applyMiddleware = __webpack_require__(/*! ./applyMiddleware */ 473);
+	var _applyMiddleware = __webpack_require__(/*! ./applyMiddleware */ 472);
 	
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 	
-	var _compose = __webpack_require__(/*! ./compose */ 474);
+	var _compose = __webpack_require__(/*! ./compose */ 473);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
-	var _warning = __webpack_require__(/*! ./utils/warning */ 471);
+	var _warning = __webpack_require__(/*! ./utils/warning */ 470);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -44893,7 +44696,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 455 */
+/* 454 */
 /*!************************************!*\
   !*** ./~/redux/lib/createStore.js ***!
   \************************************/
@@ -44907,11 +44710,11 @@
 	exports.ActionTypes = undefined;
 	exports['default'] = createStore;
 	
-	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 456);
+	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 455);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _symbolObservable = __webpack_require__(/*! symbol-observable */ 466);
+	var _symbolObservable = __webpack_require__(/*! symbol-observable */ 465);
 	
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 	
@@ -45166,7 +44969,7 @@
 	}
 
 /***/ }),
-/* 456 */
+/* 455 */
 /*!***********************************!*\
   !*** ./~/lodash/isPlainObject.js ***!
   \***********************************/
@@ -45174,9 +44977,9 @@
 
 	'use strict';
 	
-	var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ 457),
-	    getPrototype = __webpack_require__(/*! ./_getPrototype */ 463),
-	    isObjectLike = __webpack_require__(/*! ./isObjectLike */ 465);
+	var baseGetTag = __webpack_require__(/*! ./_baseGetTag */ 456),
+	    getPrototype = __webpack_require__(/*! ./_getPrototype */ 462),
+	    isObjectLike = __webpack_require__(/*! ./isObjectLike */ 464);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -45237,7 +45040,7 @@
 	module.exports = isPlainObject;
 
 /***/ }),
-/* 457 */
+/* 456 */
 /*!*********************************!*\
   !*** ./~/lodash/_baseGetTag.js ***!
   \*********************************/
@@ -45245,9 +45048,9 @@
 
 	'use strict';
 	
-	var _Symbol = __webpack_require__(/*! ./_Symbol */ 458),
-	    getRawTag = __webpack_require__(/*! ./_getRawTag */ 461),
-	    objectToString = __webpack_require__(/*! ./_objectToString */ 462);
+	var _Symbol = __webpack_require__(/*! ./_Symbol */ 457),
+	    getRawTag = __webpack_require__(/*! ./_getRawTag */ 460),
+	    objectToString = __webpack_require__(/*! ./_objectToString */ 461);
 	
 	/** `Object#toString` result references. */
 	var nullTag = '[object Null]',
@@ -45273,7 +45076,7 @@
 	module.exports = baseGetTag;
 
 /***/ }),
-/* 458 */
+/* 457 */
 /*!*****************************!*\
   !*** ./~/lodash/_Symbol.js ***!
   \*****************************/
@@ -45281,7 +45084,7 @@
 
 	'use strict';
 	
-	var root = __webpack_require__(/*! ./_root */ 459);
+	var root = __webpack_require__(/*! ./_root */ 458);
 	
 	/** Built-in value references. */
 	var _Symbol = root.Symbol;
@@ -45289,7 +45092,7 @@
 	module.exports = _Symbol;
 
 /***/ }),
-/* 459 */
+/* 458 */
 /*!***************************!*\
   !*** ./~/lodash/_root.js ***!
   \***************************/
@@ -45299,7 +45102,7 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ 460);
+	var freeGlobal = __webpack_require__(/*! ./_freeGlobal */ 459);
 	
 	/** Detect free variable `self`. */
 	var freeSelf = (typeof self === 'undefined' ? 'undefined' : _typeof(self)) == 'object' && self && self.Object === Object && self;
@@ -45310,7 +45113,7 @@
 	module.exports = root;
 
 /***/ }),
-/* 460 */
+/* 459 */
 /*!*********************************!*\
   !*** ./~/lodash/_freeGlobal.js ***!
   \*********************************/
@@ -45327,7 +45130,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 461 */
+/* 460 */
 /*!********************************!*\
   !*** ./~/lodash/_getRawTag.js ***!
   \********************************/
@@ -45335,7 +45138,7 @@
 
 	'use strict';
 	
-	var _Symbol = __webpack_require__(/*! ./_Symbol */ 458);
+	var _Symbol = __webpack_require__(/*! ./_Symbol */ 457);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -45383,7 +45186,7 @@
 	module.exports = getRawTag;
 
 /***/ }),
-/* 462 */
+/* 461 */
 /*!*************************************!*\
   !*** ./~/lodash/_objectToString.js ***!
   \*************************************/
@@ -45415,7 +45218,7 @@
 	module.exports = objectToString;
 
 /***/ }),
-/* 463 */
+/* 462 */
 /*!***********************************!*\
   !*** ./~/lodash/_getPrototype.js ***!
   \***********************************/
@@ -45423,7 +45226,7 @@
 
 	'use strict';
 	
-	var overArg = __webpack_require__(/*! ./_overArg */ 464);
+	var overArg = __webpack_require__(/*! ./_overArg */ 463);
 	
 	/** Built-in value references. */
 	var getPrototype = overArg(Object.getPrototypeOf, Object);
@@ -45431,7 +45234,7 @@
 	module.exports = getPrototype;
 
 /***/ }),
-/* 464 */
+/* 463 */
 /*!******************************!*\
   !*** ./~/lodash/_overArg.js ***!
   \******************************/
@@ -45456,7 +45259,7 @@
 	module.exports = overArg;
 
 /***/ }),
-/* 465 */
+/* 464 */
 /*!**********************************!*\
   !*** ./~/lodash/isObjectLike.js ***!
   \**********************************/
@@ -45497,7 +45300,7 @@
 	module.exports = isObjectLike;
 
 /***/ }),
-/* 466 */
+/* 465 */
 /*!**************************************!*\
   !*** ./~/symbol-observable/index.js ***!
   \**************************************/
@@ -45505,10 +45308,10 @@
 
 	'use strict';
 	
-	module.exports = __webpack_require__(/*! ./lib/index */ 467);
+	module.exports = __webpack_require__(/*! ./lib/index */ 466);
 
 /***/ }),
-/* 467 */
+/* 466 */
 /*!******************************************!*\
   !*** ./~/symbol-observable/lib/index.js ***!
   \******************************************/
@@ -45520,7 +45323,7 @@
 	  value: true
 	});
 	
-	var _ponyfill = __webpack_require__(/*! ./ponyfill */ 469);
+	var _ponyfill = __webpack_require__(/*! ./ponyfill */ 468);
 	
 	var _ponyfill2 = _interopRequireDefault(_ponyfill);
 	
@@ -45544,10 +45347,10 @@
 	
 	var result = (0, _ponyfill2['default'])(root);
 	exports['default'] = result;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../../webpack/buildin/module.js */ 468)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../../webpack/buildin/module.js */ 467)(module)))
 
 /***/ }),
-/* 468 */
+/* 467 */
 /*!***********************************!*\
   !*** (webpack)/buildin/module.js ***!
   \***********************************/
@@ -45567,7 +45370,7 @@
 	};
 
 /***/ }),
-/* 469 */
+/* 468 */
 /*!*********************************************!*\
   !*** ./~/symbol-observable/lib/ponyfill.js ***!
   \*********************************************/
@@ -45598,7 +45401,7 @@
 	};
 
 /***/ }),
-/* 470 */
+/* 469 */
 /*!****************************************!*\
   !*** ./~/redux/lib/combineReducers.js ***!
   \****************************************/
@@ -45609,13 +45412,13 @@
 	exports.__esModule = true;
 	exports['default'] = combineReducers;
 	
-	var _createStore = __webpack_require__(/*! ./createStore */ 455);
+	var _createStore = __webpack_require__(/*! ./createStore */ 454);
 	
-	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 456);
+	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 455);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _warning = __webpack_require__(/*! ./utils/warning */ 471);
+	var _warning = __webpack_require__(/*! ./utils/warning */ 470);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -45752,7 +45555,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 471 */
+/* 470 */
 /*!**************************************!*\
   !*** ./~/redux/lib/utils/warning.js ***!
   \**************************************/
@@ -45785,7 +45588,7 @@
 	}
 
 /***/ }),
-/* 472 */
+/* 471 */
 /*!*******************************************!*\
   !*** ./~/redux/lib/bindActionCreators.js ***!
   \*******************************************/
@@ -45846,7 +45649,7 @@
 	}
 
 /***/ }),
-/* 473 */
+/* 472 */
 /*!****************************************!*\
   !*** ./~/redux/lib/applyMiddleware.js ***!
   \****************************************/
@@ -45868,7 +45671,7 @@
 	
 	exports['default'] = applyMiddleware;
 	
-	var _compose = __webpack_require__(/*! ./compose */ 474);
+	var _compose = __webpack_require__(/*! ./compose */ 473);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
@@ -45922,7 +45725,7 @@
 	}
 
 /***/ }),
-/* 474 */
+/* 473 */
 /*!********************************!*\
   !*** ./~/redux/lib/compose.js ***!
   \********************************/
@@ -45966,7 +45769,7 @@
 	}
 
 /***/ }),
-/* 475 */
+/* 474 */
 /*!*****************************************************!*\
   !*** ./~/react-redux/lib/connect/wrapMapToProps.js ***!
   \*****************************************************/
@@ -45979,7 +45782,7 @@
 	exports.getDependsOnOwnProps = getDependsOnOwnProps;
 	exports.wrapMapToPropsFunc = wrapMapToPropsFunc;
 	
-	var _verifyPlainObject = __webpack_require__(/*! ../utils/verifyPlainObject */ 476);
+	var _verifyPlainObject = __webpack_require__(/*! ../utils/verifyPlainObject */ 475);
 	
 	var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 	
@@ -46055,7 +45858,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 476 */
+/* 475 */
 /*!******************************************************!*\
   !*** ./~/react-redux/lib/utils/verifyPlainObject.js ***!
   \******************************************************/
@@ -46066,11 +45869,11 @@
 	exports.__esModule = true;
 	exports.default = verifyPlainObject;
 	
-	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 456);
+	var _isPlainObject = __webpack_require__(/*! lodash/isPlainObject */ 455);
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _warning = __webpack_require__(/*! ./warning */ 447);
+	var _warning = __webpack_require__(/*! ./warning */ 446);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -46085,7 +45888,7 @@
 	}
 
 /***/ }),
-/* 477 */
+/* 476 */
 /*!******************************************************!*\
   !*** ./~/react-redux/lib/connect/mapStateToProps.js ***!
   \******************************************************/
@@ -46097,7 +45900,7 @@
 	exports.whenMapStateToPropsIsFunction = whenMapStateToPropsIsFunction;
 	exports.whenMapStateToPropsIsMissing = whenMapStateToPropsIsMissing;
 	
-	var _wrapMapToProps = __webpack_require__(/*! ./wrapMapToProps */ 475);
+	var _wrapMapToProps = __webpack_require__(/*! ./wrapMapToProps */ 474);
 	
 	function whenMapStateToPropsIsFunction(mapStateToProps) {
 	  return typeof mapStateToProps === 'function' ? (0, _wrapMapToProps.wrapMapToPropsFunc)(mapStateToProps, 'mapStateToProps') : undefined;
@@ -46112,7 +45915,7 @@
 	exports.default = [whenMapStateToPropsIsFunction, whenMapStateToPropsIsMissing];
 
 /***/ }),
-/* 478 */
+/* 477 */
 /*!*************************************************!*\
   !*** ./~/react-redux/lib/connect/mergeProps.js ***!
   \*************************************************/
@@ -46137,7 +45940,7 @@
 	exports.whenMergePropsIsFunction = whenMergePropsIsFunction;
 	exports.whenMergePropsIsOmitted = whenMergePropsIsOmitted;
 	
-	var _verifyPlainObject = __webpack_require__(/*! ../utils/verifyPlainObject */ 476);
+	var _verifyPlainObject = __webpack_require__(/*! ../utils/verifyPlainObject */ 475);
 	
 	var _verifyPlainObject2 = _interopRequireDefault(_verifyPlainObject);
 	
@@ -46189,7 +45992,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 479 */
+/* 478 */
 /*!******************************************************!*\
   !*** ./~/react-redux/lib/connect/selectorFactory.js ***!
   \******************************************************/
@@ -46202,7 +46005,7 @@
 	exports.pureFinalPropsSelectorFactory = pureFinalPropsSelectorFactory;
 	exports.default = finalPropsSelectorFactory;
 	
-	var _verifySubselectors = __webpack_require__(/*! ./verifySubselectors */ 480);
+	var _verifySubselectors = __webpack_require__(/*! ./verifySubselectors */ 479);
 	
 	var _verifySubselectors2 = _interopRequireDefault(_verifySubselectors);
 	
@@ -46317,7 +46120,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 480 */
+/* 479 */
 /*!*********************************************************!*\
   !*** ./~/react-redux/lib/connect/verifySubselectors.js ***!
   \*********************************************************/
@@ -46328,7 +46131,7 @@
 	exports.__esModule = true;
 	exports.default = verifySubselectors;
 	
-	var _warning = __webpack_require__(/*! ../utils/warning */ 447);
+	var _warning = __webpack_require__(/*! ../utils/warning */ 446);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -46351,6 +46154,195 @@
 	  verify(mapDispatchToProps, 'mapDispatchToProps', displayName);
 	  verify(mergeProps, 'mergeProps', displayName);
 	}
+
+/***/ }),
+/* 480 */
+/*!**************************************!*\
+  !*** ./src/components/FriendList.js ***!
+  \**************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 443);
+	
+	var _propTypes = __webpack_require__(/*! prop-types */ 275);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _userActions = __webpack_require__(/*! ../actions/userActions */ 481);
+	
+	var _reactBootstrap = __webpack_require__(/*! react-bootstrap */ 186);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	//import axios from 'axios';
+	
+	var FriendList = function (_Component) {
+		_inherits(FriendList, _Component);
+	
+		function FriendList() {
+			_classCallCheck(this, FriendList);
+	
+			return _possibleConstructorReturn(this, (FriendList.__proto__ || Object.getPrototypeOf(FriendList)).apply(this, arguments));
+		}
+	
+		_createClass(FriendList, [{
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+	
+				var friendsToDisplay = this.props.friends.sort(function (a, b) {
+					return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
+				});
+				var friendDisplay = friendsToDisplay.map(function (friend) {
+					return _react2.default.createElement(
+						'tr',
+						{ key: friend.id, className: 'link' },
+						_react2.default.createElement(
+							'td',
+							null,
+							_react2.default.createElement(_reactBootstrap.Image, { src: friend.dpUrl, rounded: true, responsive: true })
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							friend.name
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							friend.currentFriendship
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							friend.updateFriendship
+						),
+						_react2.default.createElement(
+							'td',
+							null,
+							_react2.default.createElement(
+								_reactBootstrap.DropdownButton,
+								{ className: 'friendshipBtn', ref: 'friendshipBtn', title: 'Just Friends?', id: 'dropdown-basic-' + friend.id },
+								_react2.default.createElement(
+									_reactBootstrap.MenuItem,
+									{ eventKey: '1', onClick: function onClick() {
+											return _this2.props.updateCurrentFriendship(friend.id, 'hookup');
+										} },
+									'hookup'
+								),
+								_react2.default.createElement(
+									_reactBootstrap.MenuItem,
+									{ eventKey: '2', onClick: function onClick() {
+											return _this2.props.updateCurrentFriendship(friend.id, 'date');
+										} },
+									'date'
+								),
+								_react2.default.createElement(
+									_reactBootstrap.MenuItem,
+									{ eventKey: '3', onClick: function onClick() {
+											return _this2.props.updateCurrentFriendship(friend.id, 'interested');
+										} },
+									'interested'
+								),
+								_react2.default.createElement(
+									_reactBootstrap.MenuItem,
+									{ eventKey: '4', onClick: function onClick() {
+											return _this2.props.updateCurrentFriendship(friend.id, 'default');
+										} },
+									'default'
+								)
+							)
+						)
+					);
+				});
+	
+				return _react2.default.createElement(
+					_reactBootstrap.Table,
+					{ responsive: true, className: 'table-striped borderless' },
+					_react2.default.createElement(
+						'thead',
+						null,
+						_react2.default.createElement(
+							'tr',
+							null,
+							_react2.default.createElement('th', null),
+							_react2.default.createElement('th', null),
+							_react2.default.createElement(
+								'th',
+								null,
+								'currentFriendship'
+							),
+							_react2.default.createElement(
+								'th',
+								null,
+								'updateFriendship'
+							)
+						)
+					),
+					_react2.default.createElement(
+						'tbody',
+						null,
+						friendDisplay
+					)
+				);
+			}
+		}]);
+	
+		return FriendList;
+	}(_react.Component);
+	
+	FriendList.propTypes = {
+		friends: _propTypes2.default.array,
+		updateCurrentFriendship: _propTypes2.default.func
+	};
+	
+	var mapStateToProps = function mapStateToProps(state) {
+		return {
+			friends: state.friends
+		};
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+		return {
+			updateCurrentFriendship: function updateCurrentFriendship(facebookId, status) {
+				dispatch((0, _userActions.updateFriendship)(facebookId, status));
+			}
+		};
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(FriendList);
+	
+	// static propTypes = {
+	// 	initialData: PropTypes.object.isRequired
+	// };
+	// state = this.props.initialData; 
+	// state = {friends: []};
+	
+	// componentDidMount() {
+	// 	axios.get('/api/userData').then(resp =>{
+	// 		const friends = resp.data.friends;
+	// 		this.setState({friends});
+	// 		}	
+	// 	);
+	// }
 
 /***/ }),
 /* 481 */
@@ -47942,7 +47934,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _redux = __webpack_require__(/*! redux */ 454);
+	var _redux = __webpack_require__(/*! redux */ 453);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -47955,9 +47947,20 @@
 	
 	var pendingNotifications = exports.pendingNotifications = function pendingNotifications() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
 	
+		switch (action.type) {
+			case 'UPDATE_FRIENDSHIP':
+				{
+					if (action.payload.updatedPNotifications === undefined) {
+						return state;
+					}
+					return action.payload.updatedPNotifications;
+				}
 	
-		return state;
+			default:
+				return state;
+		}
 	};
 	
 	var matchNotifications = exports.matchNotifications = function matchNotifications() {
@@ -50758,7 +50761,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 449);
+	var _hoistNonReactStatics = __webpack_require__(/*! hoist-non-react-statics */ 448);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	

@@ -40,14 +40,14 @@ class FriendList extends Component {
 
 
 		return (
-			<Table responsive className= "table-striped">
+			<Table responsive className= "table-striped borderless">
 				<thead>
 					<tr>
 						<th>
-							Profile Pic
+						
 						</th>
 						<th>
-							Name
+						
 						</th>
 						<th>
 							currentFriendship

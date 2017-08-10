@@ -8,9 +8,19 @@ export const facebook = (state = {}) => {
 };
 
 
-export const pendingNotifications = (state = []) => {
+export const pendingNotifications = (state = [], action) => {
+	switch(action.type){
+		case 'UPDATE_FRIENDSHIP':{
+			if(action.payload.updatedPNotifications === undefined){
+				return state;
+			}
+			return action.payload.updatedPNotifications;
+			
 
-	return state;
+		}
+			
+		default: return state;
+	}
 };
 
 
