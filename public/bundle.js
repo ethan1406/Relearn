@@ -22824,7 +22824,7 @@
 											"a",
 											{ id: "fbButton", href: "/auth/facebook" },
 											_react2.default.createElement("span", { className: "fa fa-facebook" }),
-											" Facebook"
+											"Login with Facebook"
 										)
 									)
 								)
@@ -22889,12 +22889,43 @@
 	  _createClass(Menu, [{
 	    key: 'render',
 	    value: function render() {
+	
+	      if (this.props._id === undefined || this.props._id === '') {
+	        return _react2.default.createElement(
+	          _reactBootstrap.Navbar,
+	          { fixedTop: true },
+	          _react2.default.createElement(
+	            _reactBootstrap.Navbar.Header,
+	            null,
+	            _react2.default.createElement(
+	              _reactBootstrap.Navbar.Brand,
+	              null,
+	              _react2.default.createElement('img', { src: '/images/refriend.png' })
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.Navbar.Brand,
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/friendList' },
+	                'ReFriend'
+	              )
+	            ),
+	            _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
+	          )
+	        );
+	      }
 	      return _react2.default.createElement(
 	        _reactBootstrap.Navbar,
 	        { fixedTop: true },
 	        _react2.default.createElement(
 	          _reactBootstrap.Navbar.Header,
 	          null,
+	          _react2.default.createElement(
+	            _reactBootstrap.Navbar.Brand,
+	            null,
+	            _react2.default.createElement('img', { src: '/images/refriend.png' })
+	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Navbar.Brand,
 	            null,
@@ -22920,7 +22951,7 @@
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
 	              { eventKey: 2, href: '/contacts' },
-	              'Contact Us'
+	              'Settings'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -22928,8 +22959,13 @@
 	            { pullRight: true },
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
-	              { eventKey: 1, href: '/admin' },
-	              'Settings'
+	              { eventKey: 2, href: '/cart' },
+	              'Matches',
+	              _react2.default.createElement(
+	                _reactBootstrap.Badge,
+	                { className: 'badge' },
+	                this.props.matchNotifications.length
+	              )
 	            ),
 	            _react2.default.createElement(
 	              _reactBootstrap.NavItem,
@@ -22952,11 +22988,15 @@
 	// <Link to="/about">About</Link> 
 	
 	Menu.propTypes = {
-	  pendingNotifications: _propTypes2.default.array
+	  pendingNotifications: _propTypes2.default.array,
+	  matchNotifications: _propTypes2.default.array,
+	  _id: _propTypes2.default.string
 	};
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	  return {
+	    _id: state._id,
+	    matchNotifications: state.matchNotifications,
 	    pendingNotifications: state.pendingNotifications
 	  };
 	};
@@ -46240,27 +46280,27 @@
 							null,
 							_react2.default.createElement(
 								_reactBootstrap.DropdownButton,
-								{ className: 'friendshipBtn', ref: 'friendshipBtn', title: 'Just Friends?', id: 'dropdown-basic-' + friend.id },
+								{ className: 'friendshipBtn', ref: 'friendshipBtn', title: 'Friends?', id: 'dropdown-basic-' + friend.id },
 								_react2.default.createElement(
 									_reactBootstrap.MenuItem,
 									{ eventKey: '1', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'hookup');
+											return _this2.props.updateCurrentFriendship(friend.id, 'cute');
 										} },
-									'hookup'
+									'CUTE'
 								),
 								_react2.default.createElement(
 									_reactBootstrap.MenuItem,
 									{ eventKey: '2', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'date');
+											return _this2.props.updateCurrentFriendship(friend.id, 'datable');
 										} },
-									'date'
+									'DATABLE'
 								),
 								_react2.default.createElement(
 									_reactBootstrap.MenuItem,
-									{ eventKey: '3', onClick: function onClick() {
-											return _this2.props.updateCurrentFriendship(friend.id, 'interested');
+									{ eventKey: '2', onClick: function onClick() {
+											return _this2.props.updateCurrentFriendship(friend.id, 'bff');
 										} },
-									'interested'
+									'BFF'
 								),
 								_react2.default.createElement(
 									_reactBootstrap.MenuItem,
@@ -46288,12 +46328,12 @@
 							_react2.default.createElement(
 								'th',
 								null,
-								'currentFriendship'
+								'friendship'
 							),
 							_react2.default.createElement(
 								'th',
 								null,
-								'updateFriendship'
+								'what you feel about the person'
 							)
 						)
 					),

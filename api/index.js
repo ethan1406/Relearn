@@ -1,11 +1,21 @@
 import express from 'express';
 //import mongoose from 'mongoose';
 import User from '../models/user';
+import nodemailer from 'nodemailer';
 //import db from '../server';
 
 
 
 const router = express.Router();
+
+//email sending setup
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'discountnowjed@gmail.com',
+    pass: 'jed2317scarff'
+  }
+});
 
 
 router.get('/userData', (req, res) =>{
@@ -38,10 +48,14 @@ router.put('/updateFriendship', (req, res) =>{
 					friends: {$elemMatch: {id: req.user.facebook.id}}};
 	
 
-	User.findOne(query2, 'friends.$ pendingNotifications matchNotifications', (err, person) => {
+	var email;
+
+
+	User.findOne(query2, 'friends.$ pendingNotifications matchNotifications facebook.email', (err, person) => {
 		if(err){
 			console.err(err);
 		}
+		email = person.facebook.email;
 
 		var update = {};
 		var success = false;
@@ -54,7 +68,7 @@ router.put('/updateFriendship', (req, res) =>{
 			success = true;
 
 
-			//pending notificaitons
+			//decrease pending notificaitons
 			var found1 = 0;
 			const pos1 = person.pendingNotifications.indexOf(req.user.facebook.id);
 			if(pos1 > -1){
@@ -68,7 +82,7 @@ router.put('/updateFriendship', (req, res) =>{
 			}
 			
 
-			//match notifications
+			//increase match notifications
 			if(person.matchNotifications.indexOf(req.user.facebook.id) === -1){
 				person.matchNotifications.push(req.user.facebook.id);
 			}
@@ -139,6 +153,22 @@ router.put('/updateFriendship', (req, res) =>{
 			success = false;
 		}
 
+		//send an email to the friend
+
+		var mailOptions = {
+			from: 'ethan1406@gmail.com',
+			to: email,
+			subject: 'One of your friend',
+			text: 'Find out who he/she is by visiting refriend\n'
+			//https://refriendonline.herokuapp.com/login
+		};		
+		transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('Email sent: ' + info.response);
+			}
+		});
 
 		User.findOneAndUpdate(query, update, options, (err, user) => {
 

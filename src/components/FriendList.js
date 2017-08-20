@@ -29,10 +29,10 @@ class FriendList extends Component {
 							{friend.updateFriendship}
 						</td>
 						<td>
-							<DropdownButton className="friendshipBtn"  ref = "friendshipBtn" title = "Just Friends?" id={`dropdown-basic-${friend.id}`}>
-								<MenuItem eventKey="1" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'hookup')}>hookup</MenuItem>
-								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'date')}>date</MenuItem>
-								<MenuItem eventKey="3" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'interested')}>interested</MenuItem>
+							<DropdownButton className="friendshipBtn"  ref = "friendshipBtn" title = "Friends?" id={`dropdown-basic-${friend.id}`}>
+								<MenuItem eventKey="1" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'cute')}>CUTE</MenuItem>
+								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'datable')}>DATABLE</MenuItem>
+								<MenuItem eventKey="2" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'bff')}>BFF</MenuItem>
 								<MenuItem eventKey="4" onClick = {() => this.props.updateCurrentFriendship(friend.id, 'default')}>default</MenuItem>
 							</DropdownButton>
 						</td>
@@ -50,10 +50,10 @@ class FriendList extends Component {
 						
 						</th>
 						<th>
-							currentFriendship
+							friendship
 						</th>
 						<th>
-							updateFriendship
+							what you feel about the person
 						</th>
 
 					</tr>

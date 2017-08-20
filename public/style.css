@@ -45,6 +45,9 @@ body {
     color: white; }
   .navbar-default .navbar-nav > li > a {
     color: white; }
+  .navbar-default img {
+    width: 3em;
+    height: 3em; }
 
 .borderless td, .borderless th {
   border: none !important; }
